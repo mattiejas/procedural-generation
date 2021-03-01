@@ -9,12 +9,7 @@ LAND = 2
 HIGHLANDS = 3
 MOUNTAIN = 4
 SNOW = 5
-# SAND = 3
-
-OCEAN_THRESHOLD = 0.2
-WATER_THRESHOLD = 0.4
-MOUNTAIN_THRESHOLD = 0.80
-SNOW_THRESHOLD = 0.90
+SAND = 6
 
 biomes = {
     OCEAN: [0, '#0dbddb'],
@@ -24,7 +19,7 @@ biomes = {
     HIGHLANDS: [0.7, '#38c21b'],
     MOUNTAIN: [0.8, '#e6e6e6'],
     SNOW: [0.9, '#fff'],
-    # SAND: [0.2, '#ebebae'],
+    SAND: [-1, '#ebebae'],
 }
 
 colormap = ListedColormap(np.array(list(biomes.values()))[:, 1])
