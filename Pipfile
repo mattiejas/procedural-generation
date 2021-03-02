@@ -10,6 +10,7 @@ seaborn = "*"
 scipy = "*"
 ipykernel = "*"
 autopep8 = "*"
+pillow = "*"
 
 [dev-packages]
 
