@@ -1,4 +1,4 @@
-from color import interpolate_color
+from color import interpolate_color, hex_to_rgb
 from perlin_noise import PerlinNoiseFactory
 import numpy as np
 from matplotlib.colors import ListedColormap
@@ -31,6 +31,14 @@ def get_tile_color(type, height):
         intensity = height
 
     return interpolate_color(biome['color'], biome['color_dark'], intensity)
+
+
+def get_colormap(world, heightmap):
+    colormap = np.zeros((*world.shape, 3))
+    for y in range(world.shape[0]):
+        for x in range(world.shape[1]):
+            colormap[y, x] = list(hex_to_rgb(get_tile_color(world[y, x], heightmap[y, x])))
+    return colormap.astype(np.uint8)
 
 
 def get_biome_from_height(height):

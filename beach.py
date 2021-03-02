@@ -17,7 +17,7 @@ def replace_land(world, heightmap, noise, noise_threshold):
     return world
 
 
-def add_beaches(world, heightmap, noise_threshold=0.5, octaves=3, scale=0.01):
+def add_beaches(world, heightmap, noise_threshold=0.5, octaves=4, scale=0.01):
     PN = PerlinNoiseFactory(2, octaves=octaves)
     height, width = world.shape
     noise = np.zeros((height, width))
