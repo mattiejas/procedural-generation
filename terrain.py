@@ -3,6 +3,8 @@ from perlin_noise import PerlinNoiseFactory
 import numpy as np
 from matplotlib.colors import ListedColormap
 
+BEACH_BIOME_THRESHOLD = 0.02
+
 WATER = 0
 LAND = 1
 MOUNTAIN = 2
@@ -10,11 +12,11 @@ SNOW = 3
 SAND = 4
 
 biomes = {
-    WATER: {'from': 0.0, 'to': 0.4, 'color': '#14dcff', 'color_dark': '#0dbddb'},
+    WATER: {'from': 0.0, 'to': 0.4, 'color': '#14dcff', 'color_dark': '#0fb4d1'},
     LAND: {'from': 0.4, 'to': 0.7, 'color': '#38c21b', 'color_dark': '#28a30f'},
-    MOUNTAIN: {'from': 0.7, 'to': 0.90, 'color': '#edd591', 'color_dark': '#e3c05b'},
-    SNOW: {'from': 0.90, 'to': 1.0, 'color': '#ffffff', 'color_dark': '#e6e6e6'},
-    SAND: {'from': 0.4 - 0.025, 'to': 0.4 + 0.025, 'color': '#e3e3aa', 'color_dark': '#d1d192'},
+    MOUNTAIN: {'from': 0.7, 'to': 0.90, 'color': '#c4c284', 'color_dark': '#c2bc1b'},
+    SNOW: {'from': 0.90, 'to': 1.0, 'color': '#fafff0', 'color_dark': '#e7f2ce'},
+    SAND: {'from': 0.4 - BEACH_BIOME_THRESHOLD, 'to': 0.4 + BEACH_BIOME_THRESHOLD, 'color': '#f2f28d', 'color_dark': '#e8e87b'},
 }
 
 colormap = ListedColormap([b['color'] for b in biomes.values()])
@@ -45,7 +47,7 @@ def get_biome_from_height(height):
 get_biomes = np.vectorize(get_biome_from_height)
 
 
-def generate_terrain(width=256, height=256, octaves=6, scale=0.01):
+def generate_terrain(width=256, height=256, octaves=6, scale=0.03):
     PN = PerlinNoiseFactory(2, octaves=octaves)
     noise = np.zeros((height, width))
 
@@ -53,5 +55,4 @@ def generate_terrain(width=256, height=256, octaves=6, scale=0.01):
         for x in range(0, width):
             noise[y, x] = PN(x * scale, y * scale)
 
-    noise = (noise - noise.min()) / (noise.max() - noise.min())
-    return get_biomes(noise), noise
+    return (noise - noise.min()) / (noise.max() - noise.min())

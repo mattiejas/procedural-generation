@@ -1,11 +1,14 @@
-from terrain import generate_terrain, colormap, get_tile_color
+from erosion import erosion
+from terrain import generate_terrain, colormap, get_tile_color, get_biomes
 from beach import add_beaches
 import matplotlib.pyplot as plt
 from PIL import Image
 from color import hex_to_rgb
 
 height, width = 256, 256
-world, heightmap = generate_terrain(width, height, scale=0.0125)
+heightmap = generate_terrain(width, height, scale=0.0125)
+heightmap = erosion(heightmap)
+world = get_biomes(heightmap)
 world, beaches_heightmap = add_beaches(world, heightmap)
 
 img = Image.new('RGB', (width, height))
