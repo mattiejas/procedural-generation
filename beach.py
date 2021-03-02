@@ -1,5 +1,5 @@
 import numpy as np
-from terrain import biomes, BEACH_BIOME_THRESHOLD
+from terrain import biomes
 import terrain
 from perlin_noise import PerlinNoiseFactory
 
@@ -8,10 +8,10 @@ def replace_land(world, heightmap, noise, noise_threshold):
     for y in range(0, world.shape[0]):
         for x in range(0, world.shape[1]):
             if noise[y, x] > noise_threshold and (
-                    world[y, x] == terrain.LAND or
-                    world[y, x] == terrain.WATER) and (
-                    heightmap[y, x] < biomes[terrain.WATER]['to'] + BEACH_BIOME_THRESHOLD and
-                    heightmap[y, x] > biomes[terrain.LAND]['from'] - BEACH_BIOME_THRESHOLD):
+                    world[y, x] == terrain.LOWLANDS or
+                    world[y, x] == terrain.WAVES) and (
+                    heightmap[y, x] < biomes[terrain.SAND]['to'] and
+                    heightmap[y, x] > biomes[terrain.SAND]['from']):
                 world[y, x] = terrain.SAND
 
     return world
