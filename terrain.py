@@ -6,7 +6,7 @@ from matplotlib.colors import ListedColormap
 BEACH_BIOME_THRESHOLD_WATERSIDE = 0.01
 BEACH_BIOME_THRESHOLD_LANDSIDE = 0.02
 
-OCEAN = -2
+# OCEAN = -2
 WAVES = -1
 WATER = 0
 LOWLANDS = 1
@@ -17,9 +17,9 @@ SNOW = 5
 SAND = 6
 
 biomes = {
-    OCEAN: {'from': 0.0, 'to': 0.2, 'color': '#47aebf', 'color_dark': '#2e93a3'},
-    WATER: {'from': 0.2, 'to': 0.35, 'color': '#82e4f5', 'color_dark': '#54c3d6'},
-    WAVES: {'from': 0.35, 'to': 0.4, 'color': '#f0fbfc', 'color_dark': '#a9f0fc'},
+    # OCEAN: {'from': 0.0, 'to': 0.2, 'color': '#2fa6ba', 'color_dark': '#82e4f5'},
+    WATER: {'from': 0, 'to': 0.35, 'color': '#82e4f5', 'color_dark': '#158496'},
+    WAVES: {'from': 0.35, 'to': 0.4, 'color': '#f0fbfc', 'color_dark': '#88ecfc'},
     LOWLANDS: {'from': 0.4, 'to': 0.5, 'color': '#30b315', 'color_dark': '#28a30f'},
     LAND: {'from': 0.5, 'to': 0.6, 'color': '#3bc91e', 'color_dark': '#33bd17'},
     HIGHLANDS: {'from': 0.6, 'to': 0.7, 'color': '#8bf576', 'color_dark': '#63e349'},
@@ -51,9 +51,9 @@ def get_colormap(world, heightmap):
 
 
 def get_biome_from_height(height):
-    if height < biomes[OCEAN]['to']:
-        return OCEAN
-    elif height < biomes[WATER]['to']:
+    # if height < biomes[OCEAN]['to']:
+    #     return OCEAN
+    if height < biomes[WATER]['to']:
         return WATER
     elif height < biomes[WAVES]['to']:
         return WAVES
