@@ -6,7 +6,7 @@ def hex_to_rgb(hex):
 
 
 def rgb_to_hex(r, g, b):
-    r, g, b = round(r), round(g), round(b)
+    r, g, b = int(round(r)), int(round(g)), int(round(b))
     return "#{0:02x}{1:02x}{2:02x}".format(clamp(r), clamp(g), clamp(b))
 
 
